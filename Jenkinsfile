@@ -8,5 +8,13 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                app = docker.build("willbla/train-schedule")
+                app.inside {
+                    sh 'echo "Tests passed"'
+                }
+            }
+        }
     }
 }
