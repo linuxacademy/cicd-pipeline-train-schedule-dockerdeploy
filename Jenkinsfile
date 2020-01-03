@@ -19,6 +19,7 @@ pipeline {
                         sh 'echo $(curl localhost:8080)'
                     }
                 }
+                sh 'docker images'
             }
         }
         stage('Push Docker Image') {
