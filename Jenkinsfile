@@ -11,12 +11,13 @@ pipeline {
         stage('Build Container') {
             when {
                 branch 'master'
-            }
+                }
             steps {
                 script {
                     app = docker.build("murphtest/trainapp")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
+                    }
                 }
             }
         }
