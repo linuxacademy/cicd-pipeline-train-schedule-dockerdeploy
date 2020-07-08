@@ -39,7 +39,6 @@ pipeline {
                 branch 'master'
             }
             steps {
-                input 'Deploy to Development?'
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'deploy', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     script {
@@ -55,5 +54,26 @@ pipeline {
                 }
             }
         }
+    }
+	stage('DeploytoProduction') {
+	    when {
+		branch 'master'
+	}
+	    steps {
+		input 'Deploy to Production?'
+                milestone(1)
+                withCredentials([usernamePassword(credentialsId: 'deploy', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                    script {
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$docker \"docker pull mohdaslam/train-schedule:${env.BUILD_NUMBER}\""
+                        try {
+                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop train-schedule\""
+                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm train-schedule\""
+                        } catch (err) {
+                            echo: 'caught error: $err'
+                        }
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$docker_dev_server \"docker run --restart always --name train-schedule -p 8080:8080 -d mohdaslam/train-schedule:${env.BUILD_NUMBER}\""
+                    }
+                }
+	}	
     }
 }
