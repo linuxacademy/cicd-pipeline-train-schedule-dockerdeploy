@@ -20,7 +20,7 @@ pipeline {
                      }
                  }
              }
-         }
+        
          stage('Push Docker Image') {
              when {
                  branch 'master'
@@ -33,8 +33,8 @@ pipeline {
                      }
                  }
              }
-         }
-     }
+         
+     
           stage('DeployToProduction') {
           when {
                branch 'master'
@@ -53,8 +53,12 @@ pipeline {
                  }
                  sh "sshpass -p 'jenkins' -v ssh -o StrictHostKeyChecking=no deploy@prod_ip \"docker run --restart always --name train-schedule -p 8080:8080 -d syrinedkhil/train-schedule:${env.BUILD_NUMBER}\""
              }
+               }
          }
      }
- }
+ 
+         
+         
+   }
 
 }
