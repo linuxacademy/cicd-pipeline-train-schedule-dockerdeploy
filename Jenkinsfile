@@ -35,15 +35,15 @@ pipeline {
              }
          }
      }
-         stage ('DeployToProduction') {
-     when {
-         branch 'master'
-     }
-     steps {
-         input 'Deploy to Production'
-         milestone(1)
-         withCredentials ([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'deploy', passwordVariable: 'jenkins')]) {
-             script {
+          stage ('DeployToProduction') {
+          when {
+               branch 'master'
+          }
+          steps {
+               input 'Deploy to Production'
+               milestone(1)
+               withCredentials ([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'deploy', passwordVariable: 'jenkins')]) {
+               script {
                  sh "sshpass -p 'jenkins' -v ssh -o StrictHostKeyChecking=no deploy@prod_ip \"docker pull syrinedkhil/train-schedule:${env.BUILD_NUMBER}\""
                  try {
                     sh "sshpass -p 'jenkins' -v ssh -o StrictHostKeyChecking=no deploy@prod_ip \"docker stop train-schedule\""
