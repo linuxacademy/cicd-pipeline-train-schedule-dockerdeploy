@@ -9,8 +9,6 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-         
-            }
             steps {
                 script {
                     app = docker.build("francis535/train-schedule")
@@ -21,8 +19,6 @@ pipeline {
             }
         }
         stage('Push Docker Image') {
-            
-            }
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
