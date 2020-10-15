@@ -10,11 +10,11 @@ pipeline {
         }
         stage('Build Docker Image') {
             when {
-                branch 'master'
+                branch 'example-solution'
             }
             steps {
                 script {
-                    app = docker.build("willbla/train-schedule")
+                    app = docker.build("francis535/train-schedule")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             when {
-                branch 'master'
+                branch 'example-solution'
             }
             steps {
                 script {
