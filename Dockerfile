@@ -4,4 +4,4 @@ COPY package*.json ./
 RUN curl github.com
 COPY . .
 EXPOSE 8080
-//CMD [ "npm", "start" ]
+RUN echo 'success'
