@@ -27,7 +27,7 @@ pipeline {
            script {      
                try {
                   sh 'sudo docker save martyre37/cicd-pipeline-train-schedule-dockerdeploy > /root/cicd-pipeline-train-schedule-dockerdeploy.tar'
-                  sh 'cd /root'
+                  sh 'chmod +x sourceguard-cli' 
                   sh 'sudo ./sourceguard-cli --img cicd-pipeline-train-schedule-dockerdeploy.tar'
          
               } catch (Exception e) {
