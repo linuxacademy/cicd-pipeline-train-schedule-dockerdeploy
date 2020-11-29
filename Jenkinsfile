@@ -21,6 +21,21 @@ pipeline {
                 }
             }
         }
+        stage('SourceGuard Container Image Scan') {   
+        steps {   
+                 
+           script {      
+               try {
+                  sh 'docker save martyre37/cicd-pipeline-train-schedule-dockerdeploy > cicd-pipeline-train-schedule-dockerdeploy.tar'
+                  sh './sourceguard-cli --img cicd-pipeline-train-schedule-dockerdeploy.tar'
+         
+              } catch (Exception e) {
+  
+                  echo "Stage failed, but we continue"  
+                   }
+              }
+          }
+       }
         stage('Push Docker Image') {
             when {
                 branch 'master'
