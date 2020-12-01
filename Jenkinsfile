@@ -26,8 +26,7 @@ pipeline {
            script {      
                try {
                   sh 'docker save martyre37/cicd-pipeline-train-schedule-dockerdeploy > cicd-pipeline-train-schedule-dockerdeploy.tar'
-                  sh 'export SG_CLIENT_ID=39ac2921-cce5-407f-a9fc-f5856b4a5514'
-                  sh 'export SG_SECRET_KEY=76fbc2f149a942519e9679a2c0dbc092'
+                  sh 'export SG_CLIENT_ID=ba81e3cd-a957-4a21-a565-9c806204eeef ; export SG_SECRET_KEY=9c7a9baaf63f416a82a92863e8754902'
                   sh './sourceguard-cli --img /var/lib/jenkins/workspace/train-schedule_master/cicd-pipeline-train-schedule-dockerdeploy.tar'
          
               } catch (Exception e) {
