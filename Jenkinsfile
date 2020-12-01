@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        SG_CLIENT_ID = credentials("SG_CLIENT_ID")
-        SG_SECREDT_KEY = credentials("SG_SECRET_KEY")
+        SG_CLIENT_ID = '334bdb24-8166-4af2-a368-f3874b5c6aef'
+        SG_SECREDT_KEY = '76f810b7274446c8ac94d8b8ca0d57cd'
     }
      stages {
          
