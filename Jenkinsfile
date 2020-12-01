@@ -1,6 +1,11 @@
 pipeline {
     agent any
-    stages {
+    enviroment {
+        SG_CLIENT_ID = credentials("SG_CLIENT_ID")
+        SG_SECREDT_KEY = credentials("SG_SECRET_KEY")
+    }
+    
+        stages {
         stage('Build') {
             steps {
                 echo 'Running build automation'
@@ -26,7 +31,7 @@ pipeline {
            script {      
                try {
                   sh 'docker save martyre37/cicd-pipeline-train-schedule-dockerdeploy > cicd-pipeline-train-schedule-dockerdeploy.tar'
-                  sh 'export SG_CLIENT_ID=ba81e3cd-a957-4a21-a565-9c806204eeef ; export SG_SECRET_KEY=9c7a9baaf63f416a82a92863e8754902'
+                 
                   sh './sourceguard-cli --img /var/lib/jenkins/workspace/train-schedule_master/cicd-pipeline-train-schedule-dockerdeploy.tar'
          
               } catch (Exception e) {
