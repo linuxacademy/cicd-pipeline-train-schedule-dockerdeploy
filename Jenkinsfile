@@ -31,7 +31,7 @@ pipeline {
            script {      
                try {
                   sh 'docker save martyre37/cicd-pipeline-train-schedule-dockerdeploy > cicd-pipeline-train-schedule-dockerdeploy.tar'
-                 
+                  sh 'export -p'
                   sh './sourceguard-cli --img /var/lib/jenkins/workspace/train-schedule_master/cicd-pipeline-train-schedule-dockerdeploy.tar'
          
               } catch (Exception e) {
