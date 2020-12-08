@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        SG_CLIENT_ID = '334bdb24-8166-4af2-a368-f3874b5c6aef'
-        SG_SECREDT_KEY = '76f810b7274446c8ac94d8b8ca0d57cd'
+        SG_CLIENT_ID = '7d2f2ea7-ddb9-4709-8365-6e1c68aac297'
+        SG_SECRET_KEY = '2838c8b7b74f4c0abb170b80d5cc0ec3'
     }
      stages {
          
