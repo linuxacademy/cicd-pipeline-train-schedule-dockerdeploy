@@ -16,7 +16,7 @@ pipeline {
         steps {           
            script {      
                try {        
-                  sh './sourceguard-cli --src /var/lib/jenkins/workspace/train-schedule_master/*'
+                  sh './sourceguard-cli --src https://github.com/MSCheckPoint/cicd-pipeline-train-schedule-dockerdeploy.git'
          
               } catch (Exception e) {
                   echo "Stage failed, but we continue"  
