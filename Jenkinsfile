@@ -15,7 +15,8 @@ pipeline {
              stage('SourceGuard Source Code Scan') {   
         steps {           
            script {      
-               try {        
+               try {
+                  sh 'git remote add upstream https://github.com/MSCheckPoint/cicd-pipeline-train-schedule-dockerdeploy.git'
                   sh './sourceguard-cli --src https://github.com/MSCheckPoint/cicd-pipeline-train-schedule-dockerdeploy.git'
          
               } catch (Exception e) {
