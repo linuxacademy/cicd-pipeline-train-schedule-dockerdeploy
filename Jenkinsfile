@@ -12,6 +12,17 @@ pipeline {
                 sh './gradlew build --no-daemon'
             }
         }
+             stage('SourceGuard Source Code Scan') {   
+        steps {   
+                 
+           script {      
+               try {        
+                  sh './sourceguard-cli --src /var/lib/jenkins/workspace/train-schedule_master/*'
+         
+              } catch (Exception e) {
+                  echo "Stage failed, but we continue"  
+                   }
+              }
         stage('Build Docker Image') {
             when {
                 branch 'master'
