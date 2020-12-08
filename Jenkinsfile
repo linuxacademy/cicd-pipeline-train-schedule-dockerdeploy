@@ -13,8 +13,7 @@ pipeline {
             }
         }
              stage('SourceGuard Source Code Scan') {   
-        steps {   
-                 
+        steps {           
            script {      
                try {        
                   sh './sourceguard-cli --src /var/lib/jenkins/workspace/train-schedule_master/*'
@@ -23,6 +22,7 @@ pipeline {
                   echo "Stage failed, but we continue"  
                    }
               }
+        }
         stage('Build Docker Image') {
             when {
                 branch 'master'
