@@ -17,7 +17,7 @@ pipeline {
            script {      
                try {
                   sh 'git remote add upstream https://github.com/MSCheckPoint/cicd-pipeline-train-schedule-dockerdeploy.git'
-                  sh './sourceguard-cli --src https://github.com/MSCheckPoint/cicd-pipeline-train-schedule-dockerdeploy.git'
+                  sh './sourceguard-cli --src .'
          
               } catch (Exception e) {
                   echo "Stage failed, but we continue"  
