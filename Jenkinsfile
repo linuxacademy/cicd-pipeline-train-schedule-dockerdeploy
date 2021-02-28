@@ -1,8 +1,11 @@
 pipeline {
     agent any
     environment {
-        SG_CLIENT_ID = '7d2f2ea7-ddb9-4709-8365-6e1c68aac297'
-        SG_SECRET_KEY = '2838c8b7b74f4c0abb170b80d5cc0ec3'
+        CHKP_CLOUDGUARD_ID = '64a1e263-7dc6-4eaf-ba04-446651528157'
+        CHKP_CLOUDGUARD_SECRET = 'zn6eyf9cy7763faek3z5fmxs'
+       */ SG_CLIENT_ID = '7d2f2ea7-ddb9-4709-8365-6e1c68aac297'
+       */ SG_SECRET_KEY = '2838c8b7b74f4c0abb170b80d5cc0ec3'
+   
     }
      stages {
          
