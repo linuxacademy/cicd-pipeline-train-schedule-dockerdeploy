@@ -22,7 +22,7 @@ pipeline {
                   sh './sourceguard-cli --src .'
          
               } catch (Exception e) {
-                  echo "Stage failed, but we continue!"  
+                  echo "Stage failed, but we continue"  
                    }
                  }
               }
