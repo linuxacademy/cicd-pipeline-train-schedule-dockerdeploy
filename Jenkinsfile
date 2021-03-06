@@ -18,7 +18,7 @@ pipeline {
         steps {           
            script {      
                try {                 
-                  sh 'sudo ./shiftleft code-scan --src .'
+                  sh './shiftleft code-scan --src .'
          
               } catch (Exception e) {
                   echo "Stage failed, but we continue"  
