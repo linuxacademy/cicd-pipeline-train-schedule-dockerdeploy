@@ -1,6 +1,7 @@
 pipeline {
     agent any
     environment {
+        SHIFTLEFT_REGION = 'eu'
         CHKP_CLOUDGUARD_ID = '313f4eed-5257-48bf-a139-9b5ebf37b093'
         CHKP_CLOUDGUARD_SECRET = '4zf8mtdiw9xjicdszd3isgun'
     }
