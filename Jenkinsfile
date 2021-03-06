@@ -5,16 +5,11 @@ pipeline {
         CHKP_CLOUDGUARD_ID = '313f4eed-5257-48bf-a139-9b5ebf37b093'
         CHKP_CLOUDGUARD_SECRET = '4zf8mtdiw9xjicdszd3isgun'
     }
-    options {
-        //clean before build
-        skipDefaultCheckout(true)
-    }
      stages {
          
         stage('Build') {
             steps {
-                // Clean before build
-                cleanWs()
+                
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
             }
