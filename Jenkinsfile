@@ -89,7 +89,7 @@ pipeline {
     stage('Secure WebApp in Production with Appsec') {   
         steps {    
             input 'Deploy with AppSec?'
-            milestone(1)
+            milestone(2)
             withCredentials([usernamePassword(credentialsId: 'CentOSprodForDocker', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                 script {      
                   sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip_CentOS_for_Docker \"docker pull checkpoint/infinity-next-nano-agent"
