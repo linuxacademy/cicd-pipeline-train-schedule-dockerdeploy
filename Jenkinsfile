@@ -96,6 +96,7 @@ pipeline {
                   }
           }
     }
+              }
          post {
             // Clean after build
             always {
@@ -106,6 +107,5 @@ pipeline {
                         patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
                                    [pattern: '.propsfile', type: 'EXCLUDE']])
             }
-        }
-     } 
+        } 
 }
