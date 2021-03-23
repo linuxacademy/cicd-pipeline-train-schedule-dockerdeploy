@@ -90,6 +90,20 @@ pipeline {
             }
         }
     }
+    stage('Secure WebApp in Production with Appsec') {   
+        steps {   
+                 
+           script {      
+               try {
+                  sh 'docker pull checkpoint/infinity-next-nano-agent'
+                  sh 'docker run -d --name=agent-container --ipc=192.168.182.131 -v=/var/lib/jenkins/workspace/train-schedule_master/cp/conf -v=/var/lib/jenkins/workspace/train-schedule_master/cp/data -v=<path to persistent location for agent debugs and logs>:/var/log/nano_agent -it checkpoint/infinity-next-nano-agent /cp-nano-agent --token cp-553df5cf-36c7-4fe6-9334-60b303cba808ca0535bf-e41c-4078-8efc-865b40b992aa'         
+              } catch (Exception e) {
+  
+                  echo "Stage failed, but we continue! "  
+                   }
+              }
+          }
+       }
          post {
             // Clean after build
             always {
