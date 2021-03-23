@@ -96,7 +96,7 @@ pipeline {
                   }
           }
     }
-     stage('Clean after build') { 
+     parallel('Clean after build') { 
          post {
             // Clean after build
             always {
