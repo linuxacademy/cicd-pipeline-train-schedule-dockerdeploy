@@ -93,7 +93,7 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'CentOSprodForDocker', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                 script {      
                   sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip_CentOS_for_Docker \"docker pull checkpoint/infinity-next-nano-agent\""
-                  sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip_CentOS_for_Docker \"docker run -d --name=agent-container${env.BUILD_NUMBER} --ipc=infinity-next-nano-agent -v=/var/lib/jenkins/workspace/train-schedule_master/cp/conf -v=/var/lib/jenkins/workspace/train-schedule_master/cp/data -v=/var/lib/jenkins/workspace/train-schedule_master/cp/conf -v=/var/lib/jenkins/workspace/train-schedule_master/cp/log/nano_agent -it checkpoint/infinity-next-nano-agent /cp-nano-agent --token cp-553df5cf-36c7-4fe6-9334-60b303cba808ca0535bf-e41c-4078-8efc-865b40b992aa\""         
+                  sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip_CentOS_for_Docker \"docker run -d --name=agent-container${env.BUILD_NUMBER} --ipc=192.168.182.130 -v=/var/lib/jenkins/workspace/train-schedule_master/cp/conf -v=/var/lib/jenkins/workspace/train-schedule_master/cp/data -v=/var/lib/jenkins/workspace/train-schedule_master/cp/conf -v=/var/lib/jenkins/workspace/train-schedule_master/cp/log/nano_agent -it checkpoint/infinity-next-nano-agent /cp-nano-agent --token cp-553df5cf-36c7-4fe6-9334-60b303cba808ca0535bf-e41c-4078-8efc-865b40b992aa\""         
                   }
             }
           }
