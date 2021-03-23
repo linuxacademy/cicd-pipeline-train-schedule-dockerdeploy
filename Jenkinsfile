@@ -18,8 +18,7 @@ pipeline {
         steps {           
            script {      
                try {                 
-                  sh './shiftleft code-scan --src .'
-         
+                  sh './shiftleft code-scan --src .'      
               } catch (Exception e) {
                   echo "Stage failed, but we continue!"  
                    }
@@ -46,9 +45,7 @@ pipeline {
                   sh 'docker save martyre37/cicd-pipeline-train-schedule-dockerdeploy > cicd-pipeline-train-schedule-dockerdeploy.tar'
                   sh 'export -p'
                   sh './shiftleft code-scan --img /var/lib/jenkins/workspace/train-schedule_master/cicd-pipeline-train-schedule-dockerdeploy.tar'
-         
               } catch (Exception e) {
-  
                   echo "Stage failed, but we continue! "  
                    }
               }
