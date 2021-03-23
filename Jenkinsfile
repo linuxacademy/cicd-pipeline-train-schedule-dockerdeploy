@@ -1,9 +1,11 @@
 pipeline {
     agent any
     environment {
-        SHIFTLEFT_REGION = 'eu'
-        CHKP_CLOUDGUARD_ID = '313f4eed-5257-48bf-a139-9b5ebf37b093'
-        CHKP_CLOUDGUARD_SECRET = '4zf8mtdiw9xjicdszd3isgun'
+       // SHIFTLEFT_REGION = 'eu'
+       SG_CLIENT_ID='f112e396-cc24-41a7-965e-f4f6a15edc70'
+       SG_SECRET_KEY='7357b344e7ca4169be3857807eabac46'
+       // CHKP_CLOUDGUARD_ID = '313f4eed-5257-48bf-a139-9b5ebf37b093'
+       // CHKP_CLOUDGUARD_SECRET = '4zf8mtdiw9xjicdszd3isgun'
     }
      stages {
          
