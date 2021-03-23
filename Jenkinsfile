@@ -40,8 +40,7 @@ pipeline {
             }
         }
         stage('SourceGuard Container Image Scan') {   
-        steps {   
-                 
+        steps {               
            script {      
                try {
                   sh 'docker save martyre37/cicd-pipeline-train-schedule-dockerdeploy > cicd-pipeline-train-schedule-dockerdeploy.tar'
@@ -89,7 +88,6 @@ pipeline {
                 }
             }
         }
-    }
     stage('Secure WebApp in Production with Appsec') {   
         steps {              
            script {      
