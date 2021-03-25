@@ -93,7 +93,7 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'CentOSprodForDocker', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                 script {      
                   sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip_CentOS_for_Docker \"docker pull checkpoint/infinity-next-nginx\""
-                  sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip_CentOS_for_Docker \"docker run -d --name=agent-container${env.BUILD_NUMBER} --ipc=http://docker-production-vm.localserver.com -v=/etc/cp/conf -v=/etc/cp/data -v=/var/log/nano_agent -it checkpoint/infinity-next-nginx /cp-nano-agent --token cp-553df5cf-36c7-4fe6-9334-60b303cba808ca0535bf-e41c-4078-8efc-865b40b992aa\""         
+                  sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip_CentOS_for_Docker \"docker run -d --name=agent-container${env.BUILD_NUMBER} --ipc=host -v=/etc/cp/conf -v=/etc/cp/data -v=/var/log/nano_agent -it checkpoint/infinity-next-nginx /cp-nano-agent --token cp-553df5cf-36c7-4fe6-9334-60b303cba808ca0535bf-e41c-4078-8efc-865b40b992aa\""         
                   }
             }
           }
