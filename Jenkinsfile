@@ -8,6 +8,7 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
+        /*docker.build with the docer image name,run the image for curl localhost:8080*/
         stage('Build Docker Image') {
             when {
                 branch 'master'
@@ -21,6 +22,7 @@ pipeline {
                 }
             }
         }
+        /* push the image to docker hub, refer to a docker registry, push two types of the tag: build number and latest*/
         stage('Push Docker Image') {
             when {
                 branch 'master'
@@ -43,8 +45,10 @@ pipeline {
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     script {
+                        /*run shell command and run a docker pull image, try command to catch error*/
                         sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull willbla/train-schedule:${env.BUILD_NUMBER}\""
                         try {
+                            /*do stop and remove the docker image*/
                             sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop train-schedule\""
                             sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm train-schedule\""
                         } catch (err) {
