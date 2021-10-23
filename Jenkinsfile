@@ -1,6 +1,8 @@
 pipeline {
     agent any
     environment {
+        
+        export SHIFTLEFT_REGION=eu1
        // SHIFTLEFT_REGION = 'eu'
         
         SG_CLIENT_ID = credentials("SG_CLIENT_ID")
@@ -22,8 +24,9 @@ pipeline {
              stage('SourceGuard Source Code Scan') {   
         steps {           
            script {      
-               try {                 
-                  sh './sourceguard-cli --src .'      
+               try {    
+                  sh 'shiftleft –-version'
+                  sh 'shiftleft code-scan -h .'      
               } catch (Exception e) {
                   echo "Stage failed, but we continue!"  
                    }
@@ -49,7 +52,7 @@ pipeline {
                try {
                   sh 'docker save martyre37/cicd-pipeline-train-schedule-dockerdeploy > cicd-pipeline-train-schedule-dockerdeploy.tar'
                   sh 'export -p'
-                  sh './sourceguard-cli --img /var/lib/jenkins/workspace/train-schedule_master/cicd-pipeline-train-schedule-dockerdeploy.tar'
+                  sh 'shiftleft image-scan -h /var/lib/jenkins/workspace/train-schedule_master/cicd-pipeline-train-schedule-dockerdeploy.tar'
               } catch (Exception e) {
                  // Optional Cleaning Workspace after failed build   
                 //   sh rm -rf /var/lib/jenkins/workspace/train-schedule_master/train-schedule_master*
