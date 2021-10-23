@@ -3,7 +3,7 @@ pipeline {
     environment {
         
         //Initialize Sourceguard SHIFTLEFT 
-       SHIFTLEFT_REGION=eu1
+       SHIFTLEFT_REGION = 'eu1'
         
        SG_CLIENT_ID = credentials("SG_CLIENT_ID")
        SG_SECRET_KEY = credentials("SG_SECRET_KEY")
