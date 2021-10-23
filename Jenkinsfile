@@ -2,6 +2,8 @@ pipeline {
     agent any
     environment {   
         //Initialize Sourceguard SHIFTLEFT 
+        //push from visual studio 
+
        SHIFTLEFT_REGION = 'eu1'
         
        SG_CLIENT_ID = credentials("SG_CLIENT_ID")
