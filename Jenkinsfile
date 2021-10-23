@@ -2,11 +2,11 @@ pipeline {
     agent any
     environment {
         
-        export SHIFTLEFT_REGION=eu1
-       // SHIFTLEFT_REGION = 'eu'
+        //Initialize Sourceguard SHIFTLEFT 
+       SHIFTLEFT_REGION=eu1
         
-        SG_CLIENT_ID = credentials("SG_CLIENT_ID")
-        SG_SECRET_KEY = credentials("SG_SECRET_KEY")
+       SG_CLIENT_ID = credentials("SG_CLIENT_ID")
+       SG_SECRET_KEY = credentials("SG_SECRET_KEY")
         
      //  SG_CLIENT_ID='f112e396-cc24-41a7-965e-f4f6a15edc70'
      //  SG_SECRET_KEY='7357b344e7ca4169be3857807eabac46'
