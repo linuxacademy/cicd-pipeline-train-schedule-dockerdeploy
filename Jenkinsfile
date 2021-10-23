@@ -1,7 +1,6 @@
 pipeline {
     agent any
-    environment {
-        
+    environment {   
         //Initialize Sourceguard SHIFTLEFT 
        SHIFTLEFT_REGION = 'eu1'
         
