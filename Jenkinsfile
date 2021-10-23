@@ -51,7 +51,9 @@ pipeline {
                   sh 'export -p'
                   sh './sourceguard-cli --img /var/lib/jenkins/workspace/train-schedule_master/cicd-pipeline-train-schedule-dockerdeploy.tar'
               } catch (Exception e) {
-                  echo "Stage failed, but we continue! "  
+                 // Optional Cleaning Workspace after failed build   
+                //   sh rm -rf /var/lib/jenkins/workspace/train-schedule_master/train-schedule_master*
+                       echo "Stage failed, but we continue! "
                    }
               }
           }
