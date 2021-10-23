@@ -25,7 +25,7 @@ pipeline {
         steps {           
            script {      
                try {    
-                  sh 'chmod +x shiftleft'
+                  sh 'chmod +x /var/lib/jenkins/workspace/shiftleft'
                   sh 'shiftleft –-version'
                   sh 'shiftleft code-scan -h .'      
               } catch (Exception e) {
