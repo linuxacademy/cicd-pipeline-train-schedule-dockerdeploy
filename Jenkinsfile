@@ -24,7 +24,8 @@ pipeline {
              stage('SourceGuard Source Code Scan') {   
         steps {           
            script {      
-               try {    
+               try {   
+                  sh 'pwd'
                   sh 'chmod +x shiftleft'
                   sh 'shiftleft –-version'
                   sh 'shiftleft code-scan -h .'      
