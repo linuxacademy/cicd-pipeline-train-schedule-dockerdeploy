@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'test' }
     stages {
           stage('Build Docker image') {
         steps {
@@ -7,7 +7,7 @@ pipeline {
             // tag DockerHubAccountName/RepoName:tag(semver)
             sh 'pwd'
             sh 'whoami'
-            sh 'docker build -t cloudtesttt/docker-image-guru:v1.0.2 .'
+            sh 'docker build -t cloudtesttt/docker-image-guru:$BUILD_NUMBER .'
             
 
         }
@@ -19,7 +19,7 @@ pipeline {
                 
             sh '''
             docker login --username=$USERNAME --password=$PASSWORD
-            docker push cloudtesttt/docker-image-guru:v1.0.2
+            docker push cloudtesttt/docker-image-guru:$BUILD_NUMBER
             '''
             }
 
@@ -37,7 +37,7 @@ pipeline {
                     milestone(1)
                     withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                         script {
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull cloudtesttt/docker-image-guru:v1.0.2\""
+                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull cloudtesttt/docker-image-guru:$BUILD_NUMBER\""
                             
                             try {
                             sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop train-schedule\""
@@ -46,7 +46,7 @@ pipeline {
                             echo: 'caught error: $err'
                         }
                             
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 8080:8080 -d cloudtesttt/docker-image-guru:v1.0.2\""
+                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 8080:8080 -d cloudtesttt/docker-image-guru:$BUILD_NUMBER\""
                         }
                     }
                 }
