@@ -1,3 +1,5 @@
+// declerative Jenkins pipeline script that sets up a single stage called build that executes a gradle build, resulting in trainSchedule.zip artifact
+
 pipeline {
     agent any
     stages {
