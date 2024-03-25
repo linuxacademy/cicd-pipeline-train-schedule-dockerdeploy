@@ -33,4 +33,25 @@ pipeline {
             }
         }
     }
+    stage('DeployToStage') {
+        when {
+            branch 'master'
+        }
+        steps {
+            input 'Deploy to Stage'
+            milestone(1)
+            withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVarible: 'USERNAME', passwordVarible: 'USERPASS')]) {
+                script {
+                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$stage_ip \"docker pull azamatus/train-schedule:${env.BUILD_NUMBER}\""
+                    try {
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$stage_ip \"docker stop train-schedule\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$stage_ip \"docker rm train-schedule\""
+                    } catch (err) {
+                        echo: 'caught error: $err'
+                    }
+                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$stage_ip \"docker run --restart always --name train-schedule -p 3000:8080 -d azamatus/train-schedule:${env.BUILD_NUMBER}\""
+                }
+            }
+        }
+    }
 }
