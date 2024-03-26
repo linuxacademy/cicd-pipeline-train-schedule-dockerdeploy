@@ -6,4 +6,5 @@ pipeline {
                 echo 'Running build automation'
             }
         }
-        
+    }
+}   
