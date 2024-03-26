@@ -14,7 +14,7 @@ pipeline {
                 script {
                     app = docker.build("azamatus/train-schedule")
                     app.inside {
-                        sh 'echo $(curl localhost:8080)'
+                        sh 'echo $(curl localhost:3000)'
                     }
                 }
             }
